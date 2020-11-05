@@ -27,7 +27,7 @@ public class Controller {
 	        students.add(new Student("Sukesh", "VI", "USA"));
 	    }
 	    
-	    @ApiOperation(tags="getStudentList",response =List.class,value="get list of all students" )
+	    @ApiOperation(response =List.class,value="get list of all students" )
 	    @ApiResponses(value = { 
 	            @ApiResponse(code = 200, message = "Suceess|OK"),
 	            @ApiResponse(code = 401, message = "not authorized!"), 
@@ -40,7 +40,7 @@ public class Controller {
 	    	return this.students;
 	    }
 	    
-	    @ApiOperation(value="get details of input student",tags="getStudentList(name)", response = Student.class)
+	    @ApiOperation(value="get details of input student", response = Student.class)
 	    @ApiResponses(value= {
 	    		@ApiResponse(code=200,message="wow you made it")
 	    })
@@ -48,6 +48,28 @@ public class Controller {
 	    @RequestMapping(value="/students/{name}",method=RequestMethod.GET)
 	    public Student getStudentList(@PathVariable String name){
 	    	return this.students.stream().filter(s->s.getName().equalsIgnoreCase(name)).limit(1).findFirst().get();
+	    	
+	    }
+	    
+	    
+	    @ApiOperation(value="post details of input student", response = Student.class)
+	    @RequestMapping(value="/students/{name}",method=RequestMethod.POST)
+	    public Student postStudentList(@PathVariable String name){
+	    	return new Student("post", "post", "post");
+		    }
+	    
+	    
+	    @ApiOperation(value="delete details of student", response = Student.class)
+	    @RequestMapping(value="/students/{name}",method=RequestMethod.DELETE)
+	    public Student deleteStudentList(@PathVariable String name){
+	    	return new Student("delete", "delete", "delete");
+	    }
+	    
+	    
+	    @ApiOperation(value="put details of input student", response = Student.class)
+	    @RequestMapping(value="/students/{name}",method=RequestMethod.PUT)
+	    public Student putStudentList(@PathVariable String name){
+	    	return  new Student("put", "put", "put");
 	    	
 	    }
 }
